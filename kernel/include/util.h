@@ -90,7 +90,7 @@ static_assert(1 == 0, "Unsupported architecture!");
 #define ksu_close_fd(fd) ({ ksyscall(close, fd); })
 #define ksu_sys_setns(fd, flags) ({ ksyscall(setns, fd, flags); })
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 9, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 static __always_inline int ksu_sys_umount(char __user *name, int flags)
 { 
 	return (int)ksyscall(umount, name, flags);
