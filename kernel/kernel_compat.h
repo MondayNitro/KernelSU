@@ -51,7 +51,7 @@ static void ksu_kvfree(const void *buf)
 #define kvfree ksu_kvfree
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 8, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 __weak long copy_from_kernel_nofault(void *dst, const void *src, size_t size)
 {
 	// https://elixir.bootlin.com/linux/v5.2.21/source/mm/maccess.c#L27
@@ -68,7 +68,7 @@ __weak long copy_from_kernel_nofault(void *dst, const void *src, size_t size)
 }
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 8, 0) 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0) 
 __weak long copy_from_user_nofault(void *dst, const void __user *src, size_t size)
 {
 	// https://elixir.bootlin.com/linux/v5.8/source/mm/maccess.c#L205
@@ -186,7 +186,7 @@ static inline struct file *ksu_dentry_open(const struct path *path, int flags, c
 #define dentry_open ksu_dentry_open
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 9, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 __weak int path_mount(const char *dev_name, struct path *path, const char *type_page, unsigned long flags, void *data_page)
 {
 	char *buf __offstack_flags(PATH_MAX, GFP_KERNEL | __GFP_ZERO);
@@ -205,7 +205,7 @@ __weak int path_mount(const char *dev_name, struct path *path, const char *type_
 }
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 9, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 17, 0)
 #ifdef MODULE // bring an inline one for LKM
