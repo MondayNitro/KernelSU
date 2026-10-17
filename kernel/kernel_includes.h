@@ -491,16 +491,15 @@ static inline void kfree_byref(void *buf) { kfree(*(void **)buf); }
  *
  */
 #if defined(CONFIG_KSU_NOPRINTK) && !defined(CONFIG_KSU_DEBUG)
-#define pr_emerg(...)	do { } while (0)
-#define pr_alert(...)	do { } while (0)
-#define pr_crit(f...)	do { } while (0)
-#define pr_err(...)	do { } while (0)
-#define pr_warn(...)	do { } while (0)
-#define pr_notice(...)	do { } while (0)
-#define pr_info(...)	do { } while (0)
-#define pr_debug(...)	do { } while (0)
-#define pr_devel(...)	do { } while (0)
-#define printk(...)	do { } while (0)
+#define pr_emerg(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_alert(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_crit(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_err(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_warn(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_notice(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_info(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_debug(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
+#define pr_devel(fmt, ...)	no_printk(fmt, ##__VA_ARGS__)
 #endif // CONFIG_KSU_NOPRINTK && !CONFIG_KSU_DEBUG
 
 /**

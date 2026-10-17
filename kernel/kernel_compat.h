@@ -83,7 +83,7 @@ static void *ksu_kvcalloc(size_t n, size_t size, gfp_t flags)
 #define kvcalloc ksu_kvcalloc
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 8, 0) // probe_kernel_read
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0) // probe_kernel_read
 __weak long copy_from_kernel_nofault(void *dst, const void *src, size_t size)
 {
 	// https://elixir.bootlin.com/linux/v5.2.21/source/mm/maccess.c#L27
@@ -100,7 +100,7 @@ __weak long copy_from_kernel_nofault(void *dst, const void *src, size_t size)
 }
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 8, 0) // probe_user_read
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0) // probe_user_read
 __weak long copy_from_user_nofault(void *dst, const void __user *src, size_t size)
 {
 	// https://elixir.bootlin.com/linux/v5.8/source/mm/maccess.c#L205
@@ -229,7 +229,7 @@ old_fn:; // old type: struct file * dentry_open(struct dentry *, struct vfsmount
 #define dentry_open ksu_dentry_open
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 9, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 __weak int path_mount(const char *dev_name, struct path *path, const char *type_page, unsigned long flags, void *data_page)
 {
 	char *buf __offstack_flags(PATH_MAX, GFP_KERNEL);
